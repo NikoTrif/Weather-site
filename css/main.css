@@ -34,5 +34,8 @@ header {
       padding-right: 30px; }
 .container .row .forecast-5 {
   font-size: 10px; }
+.container .row .forecast-30 {
+  font-size: 10px;
+  overflow: scroll; }
 
 /*# sourceMappingURL=main.css.map */
