@@ -1,0 +1,11 @@
+header {
+    margin: 30px 0;
+    text-align: center;
+    .wrapper {
+        display: grid;
+        place-items: center;
+        .form-control {
+            width: 300px;
+        }
+    }
+}

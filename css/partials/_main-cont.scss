@@ -1,0 +1,38 @@
+.container {
+    .row {
+        .weather-now {
+            margin-bottom: 40px;
+            .sumary {
+                // position: absolute;
+                // top: 50%;
+                // transform: translateY(-50%);
+                // float: left;
+                h2 {
+                    font-size: 70px;
+                    #unused-unit {
+                        font-size: 15px;
+                        a {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+            .details {
+                // float: right;
+                // margin-right: 30px;
+                tbody {
+                    tr {
+                        line-height: 3;
+                         :first-child {
+                            padding-right: 30px;
+                        }
+                    }
+                }
+            }
+        }
+        .forecast-5 {
+            font-size: 10px;
+        }
+    }
+    .forecast-30 {}
+}

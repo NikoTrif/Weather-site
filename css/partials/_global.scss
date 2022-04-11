@@ -1,0 +1,17 @@
+html {
+    a {
+        color: #333;
+         :hover {
+            color: #333;
+        }
+    }
+    body {
+        font-family: $gfont;
+        color: #333;
+        //background-image: url("../img/sunny-day.gif");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+}
