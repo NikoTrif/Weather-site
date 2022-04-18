@@ -6,6 +6,7 @@ html a {
 html body {
   font-family: "Libre Baskerville", serif;
   color: #333;
+  background-image: url("../img/clear-day.gif");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -33,7 +34,9 @@ header {
     .container .row .weather-now .details tbody tr :first-child {
       padding-right: 30px; }
 .container .row .forecast-5 {
-  font-size: 10px; }
+  font-size: 10px;
+  margin-bottom: 20px;
+  overflow: scroll; }
 .container .row .forecast-30 {
   font-size: 10px;
   overflow: scroll; }
