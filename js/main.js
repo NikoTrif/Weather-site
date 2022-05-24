@@ -20,5 +20,6 @@ searcher.addEventListener('keypress', function(e) {
         //change city and state
         console.log('enter');
         console.log(searcher.value);
+        searcher.classList.replace('d-block', 'd-none');
     }
 });
