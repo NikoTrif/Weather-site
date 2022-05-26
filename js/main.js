@@ -1,51 +1,40 @@
 let place = document.getElementById("place");
 let searcher = document.getElementById("searcher");
-//let cities;
+let selectCity = document.getElementById("citySelect");
+let selectOption;
 let searchVal = '';
 let apiKey = '8e1cf7d0e536d5b4b9e3ab3ff361aaf5';
 let lat = 44.81;
 let lon = 20.46;
-let apiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-//`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+let city;
+let cities;
+//let apiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
 async function LoadWeather() {
-    // let jsonconn = new XMLHttpRequest();
-    // jsonconn.open("GET", 'js/cities.json');
-    // jsonconn.send(null);
-    // jsonconn.onload = () => {
-    //     cities = JSON.parse(jsonconn.responseText);
-    //     console.log(cities);
-    // }
-
-    // jsonconn.onerror = e => {
-    //     console.error();
-    // }
-
     let weatherData = await fetch(apiPath);
     let dat = await weatherData.json();
+
     console.log("Load Weather -> dat:");
     console.log(dat);
 }
 
 async function LoadCities() {
-    let jsonconn = await fetch('js/cities.json');
+    let jsonconn = await fetch('js/worldcities.json');
 
-    let cities = await jsonconn.json();
+    cities = await jsonconn.json();
     console.log("LOAD CITIES -> cities:");
     console.log(cities);
 
-    let city = await cities.features.filter(e => e.properties.NAME == 'HOUSTON')
+    // city = await cities.filter(e => e.city == 'Belgrade')
 
-    console.log("Load Cities -> City:");
-    console.log(city);
-    console.log("Load Cities -> Coordinates:");
-    console.log(city[0].geometry.coordinates[0][0]);
+    // console.log("Load Cities -> City:");
+    // console.log(city);
+    // console.log("Load Cities -> Coordinates:");
+    // console.log(`Latitude: ${city[0].lat} / Longitude: ${city[0].lng}`);
 
 }
 LoadCities();
 LoadWeather();
-//let weatherData = fetch(apiPath)
-//console.log(weatherData);
 
 place.addEventListener('click', function(e) {
     e.preventDefault();
@@ -64,4 +53,42 @@ searcher.addEventListener('keypress', function(e) {
 
         //let flt = cities.properties.name.filter(e => e == searchVal);
     }
+    // else {
+    //     console.log(searcher.value);
+    //     city = cities.filter(ea => ea.city = searcher.value)
+    //     if (city > 0) {
+    //         selectCity.classList.replace('d-none', 'd-block');
+
+
+    //         city.forEach(eb => {
+    //             selectCity.innerHTML = selectCity.innerHTML + `<option>${eb.city}, ${eb.country}</option>`;
+    //         });
+    //     }
+    // }
+});
+
+searcher.addEventListener('keyup', async function() {
+    // console.log(searcher.value);
+    //city = await cities.filter(ea => ea.city == searcher.value)
+    city = await cities.filter(ea => {
+        return ea.city.includes(searcher.value);
+    })
+    console.log(`Searcher -> KeyUP -> City:`);
+    console.log(city);
+    selectCity.innerHTML = '';
+    if (city.length > 0 && city.length < 10) {
+        selectCity.classList.replace('d-none', 'd-block');
+
+        city.forEach(eb => {
+            selectCity.innerHTML = selectCity.innerHTML + `<option value="${eb.lat},${eb.lng}">${eb.city}, ${eb.country}</option>`;
+        });
+        selectOption = document.getElementsByTagName('option');
+    } else {
+        selectCity.classList.replace('d-block', 'd-none');
+        selectOption = undefined;
+    }
+});
+
+selectCity.addEventListener('click', () => {
+    //ovde sam stao
 });
