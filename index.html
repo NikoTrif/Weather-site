@@ -16,8 +16,10 @@
         <h1>Weather</h1>
         <h2><a href="#" id="place">Beograd, Srbija</a></h2>
         <div class="wrapper">
-            <input id="searcher" class="form-control d-none" type="text" aria-label="Search">
-            <div class="wraper-select"><select name="CitySelect" id="citySelect" class="form-select d-none" multiple size="10" aria-label="multiple select"></select></div>
+            <input id="searcher" class="form-control d-none" type="text" aria-label="Search" autocomplete="off">
+            <div class="wraper-select">
+                <select name="CitySelect" id="citySelect" class="form-select d-none" multiple aria-label="multiple select"></select>
+            </div>
         </div>
     </header>
     <!-- Main Header END -->
@@ -28,9 +30,9 @@
             <!-- Weather Now -->
             <div class="weather-now col-12 col-md-6 clearfix">
                 <div class="sumary">
-                    <h2>32° <span id="used-unit">C</span> <span id="unused-unit"><a href="#">F</a></span></h2>
-                    <p>Sunny</p>
-                    <p>Real Feeling: 35° <span class="unit">C</span></p>
+                    <h2><span id="current-temp">32</span>° <span id="used-unit">C</span> <span id="unused-unit"><a href="#">F</a></span></h2>
+                    <p id="current-weather">Sunny</p>
+                    <p id="current-feeling"><span>Real Feeling: </span>35° <span class="unit">C</span></p>
                 </div>
                 <table class="details">
                     <tbody>
