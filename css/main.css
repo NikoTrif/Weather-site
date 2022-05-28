@@ -1,49 +1,85 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 html a {
-  color: #333; }
-  html a :hover {
-    color: #333; }
+    color: #333;
+}
+
+html a :hover {
+    color: #333;
+}
+
 html body {
-  font-family: "Libre Baskerville", serif;
-  color: #fff;
-  background-image: url("../img/sunny-day.gif");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover; }
+    font-family: "Libre Baskerville", serif;
+    color: #333;
+    background-image: url("../img/clear-day.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
 
 header {
-  margin: 30px 0;
-  text-align: center;
-  backdrop-filter: blur(10px); }
-  header .wrapper {
+    margin: 30px 0;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+header .wrapper {
+    position: relative;
     display: grid;
-    place-items: center; }
-    header .wrapper .form-control {
-      width: 300px; }
+    place-items: center;
+    height: 50px;
+}
+
+header .wrapper .form-control {
+    width: 300px;
+}
+
+header .wrapper .form-select {
+    width: 300px;
+    z-index: 100;
+}
 
 .container .row .weather-now {
-  margin-bottom: 40px; }
-  .container .row .weather-now .sumary h2 {
-    font-size: 70px; }
-    .container .row .weather-now .sumary h2 #unused-unit {
-      font-size: 15px; }
-      .container .row .weather-now .sumary h2 #unused-unit a {
-        text-decoration: none; }
-  .container .row .weather-now .details tbody tr {
-    line-height: 3; }
-    .container .row .weather-now .details tbody tr :first-child {
-      padding-right: 30px; }
+    margin-bottom: 40px;
+}
+
+.container .row .weather-now .sumary h2 {
+    font-size: 70px;
+}
+
+.container .row .weather-now .sumary h2 #unused-unit {
+    font-size: 15px;
+}
+
+.container .row .weather-now .sumary h2 #unused-unit a {
+    text-decoration: none;
+}
+
+.container .row .weather-now .details tbody tr {
+    line-height: 3;
+}
+
+.container .row .weather-now .details tbody tr :first-child {
+    padding-right: 30px;
+}
+
 .container .row .forecast-5 {
-  font-size: 10px; }
+    font-size: 10px;
+    margin-bottom: 20px;
+    overflow: scroll;
+}
+
 .container .row .forecast-30 {
-  font-size: 10px;
-  overflow: scroll; }
+    font-size: 10px;
+    overflow: scroll;
+}
 
 footer {
-  margin-top: 15px;
-  background-color: #212529;
-  color: white;
-  font-size: 12px; }
+    margin-top: 15px;
+    background-color: #212529;
+    color: white;
+    font-size: 12px;
+}
+
 
 /*# sourceMappingURL=main.css.map */

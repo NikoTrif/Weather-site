@@ -14,8 +14,11 @@
     <!-- Main Header -->
     <header>
         <h1>Weather</h1>
-        <h2><a href="#">Beograd, Srbija</a></h2>
-        <div class="wrapper"><input class="form-control" type="text" aria-label="Search"></div>
+        <h2><a href="#" id="place">Beograd, Srbija</a></h2>
+        <div class="wrapper">
+            <input id="searcher" class="form-control d-none" type="text" aria-label="Search">
+            <div class="wraper-select"><select name="CitySelect" id="citySelect" class="form-select d-none" multiple size="10" aria-label="multiple select"></select></div>
+        </div>
     </header>
     <!-- Main Header END -->
 
@@ -23,7 +26,7 @@
     <main class="container">
         <div class="row">
             <!-- Weather Now -->
-            <div class="weather-now col col-md-6 clearfix">
+            <div class="weather-now col-12 col-md-6 clearfix">
                 <div class="sumary">
                     <h2>32° <span id="used-unit">C</span> <span id="unused-unit"><a href="#">F</a></span></h2>
                     <p>Sunny</p>
@@ -52,7 +55,7 @@
             </div>
             <!-- Weather Now END -->
             <!-- 5 Days Forecast -->
-            <div class="forecast-5 col col-md-6">
+            <div class="forecast-5 col-12 col-md-6">
                 <h2>5 days forecast</h2>
                 <table class="table">
                     <thead class="table-header">
@@ -335,6 +338,10 @@
     <!-- Main Footer END -->
 
     <!-- scripts -->
+    <!-- JQuery -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- My Scripts -->
+    <script src="js/main.js"></script>
 </body>
 
 </html>

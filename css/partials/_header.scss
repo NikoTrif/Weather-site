@@ -4,10 +4,16 @@ header {
     text-align: center;
     backdrop-filter: blur(10px);
     .wrapper {
+        position: relative;
         display: grid;
         place-items: center;
+        height: 50px;
         .form-control {
             width: 300px;
+        }
+        .form-select {
+            width: 300px;
+            z-index: 100;
         }
     }
 }
