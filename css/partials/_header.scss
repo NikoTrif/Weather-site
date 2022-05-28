@@ -1,6 +1,8 @@
 header {
+    //color: $font-color;
     margin: 30px 0;
     text-align: center;
+    backdrop-filter: blur(10px);
     .wrapper {
         display: grid;
         place-items: center;
