@@ -93,18 +93,15 @@ searcher.addEventListener('keypress', function(e) {
 });
 
 searcher.addEventListener('keyup', async function() {
-    // napraviti pretragu i po originalnim nazivima gradova (city.admin_name)
-    city = await cities.filter(ea => {
+    city = [...cities.filter(ea => {
         return ea.city.toLowerCase().includes(searcher.value.toLowerCase());
-    });
-
-    // admin = await cities.filter(function(ebise) {
-    //     return ebise.admin.toLowerCase().includes(searcher.value.toLowerCase());
-    // });
-
-    //city.concat(acity);
-    console.log(city);
-    // console.log(admin);
+    }),
+    ...cities.filter(eb=>{
+        return eb.admin_name?.toLowerCase()?.includes(searcher.value.toLowerCase());
+    }),
+    ...cities.filter(ec=>{
+        return ec.city_ascii?.toLowerCase()?.includes(searcher.value.toLowerCase());
+    })];
 
     console.log(`Searcher - > KeyUP - > City: `);
     console.log(city);

@@ -1,0 +1,6 @@
+{
+    "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+    "javascript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+    "javascript.suggest.includeAutomaticOptionalChainCompletions": true,
+    "typescript.suggest.includeAutomaticOptionalChainCompletions": true
+}
