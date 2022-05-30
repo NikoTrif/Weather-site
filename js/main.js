@@ -7,18 +7,21 @@ let currentTemp = document.querySelector('#current-temp');
 let selectOption;
 let apiKey = '8e1cf7d0e536d5b4b9e3ab3ff361aaf5';
 let city;
+//let admin;
 let cities;
 let weatherData;
 
 // console.log(currentTemp.textContent);
 
 let temp;
-let weather;
-let feel;
-let wind;
-let preasure;
-let visibility;
-let humidity;
+let weather = document.querySelector('#current-weather');
+let feel = document.querySelector('#current-feeling');
+let windSpeed = document.querySelector('#wind-speed');
+let windDirection = document.querySelector('#wind-direction');
+let pressure = document.querySelector('#pressure');
+let humidity = document.querySelector('#humidity');
+let visibility = document.querySelector('#visibility');
+
 
 async function LoadWeather(lat, lon) {
     let apiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
@@ -26,6 +29,17 @@ async function LoadWeather(lat, lon) {
 
     console.log("Load Weather -> weatherData:");
     console.log(weatherData);
+
+    //Setting Weather Data
+    console.log('SelectCity -> Click:');
+    currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
+    weather.textContent = weatherData.weather[0].main;
+    feel.textContent = UnitConvert(weatherData.main.feels_like, usedUnit.textContent);
+    windSpeed.textContent = weatherData.wind.speed;
+    windDirection.textContent = weatherData.wind.deg;
+    pressure.textContent = weatherData.main.pressure;
+    humidity.textContent = weatherData.main.humidity;
+    visibility.textContent = weatherData.visibility;
 }
 
 async function LoadCities() {
@@ -79,9 +93,19 @@ searcher.addEventListener('keypress', function(e) {
 });
 
 searcher.addEventListener('keyup', async function() {
+    // napraviti pretragu i po originalnim nazivima gradova (city.admin_name)
     city = await cities.filter(ea => {
         return ea.city.toLowerCase().includes(searcher.value.toLowerCase());
-    })
+    });
+
+    // admin = await cities.filter(function(ebise) {
+    //     return ebise.admin.toLowerCase().includes(searcher.value.toLowerCase());
+    // });
+
+    //city.concat(acity);
+    console.log(city);
+    // console.log(admin);
+
     console.log(`Searcher - > KeyUP - > City: `);
     console.log(city);
     selectCity.innerHTML = '';
@@ -100,21 +124,17 @@ searcher.addEventListener('keyup', async function() {
     }
 });
 
-selectCity.addEventListener('click', async() => {
+selectCity.addEventListener('click', () => {
     let coordinates = selectCity.value.split(',');
     console.log(selectCity.value);
 
-    await LoadWeather(coordinates[0], coordinates[1]);
+    LoadWeather(coordinates[0], coordinates[1]);
 
     selectCity.classList.replace('d-block', 'd-none');
     searcher.classList.replace('d-block', 'd-none');
     searcher.value = null;
 
     place.innerHTML = selectCity.options[selectCity.selectedIndex].textContent;
-
-    //Setting Weather Data
-    currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
-    //ovde sam stao
 });
 
 unusedUnit.addEventListener('click', (e) => {
@@ -126,4 +146,6 @@ unusedUnit.addEventListener('click', (e) => {
     unusedUnit.textContent = uu;
 
     currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
+    feel.textContent = UnitConvert(weatherData.main.feels_like, usedUnit.textContent);
+    document.querySelector('#feeling-unit').textContent = usedUnit.textContent;
 });

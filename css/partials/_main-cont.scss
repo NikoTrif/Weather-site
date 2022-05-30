@@ -23,7 +23,7 @@
                 tbody {
                     tr {
                         line-height: 3;
-                         :first-child {
+                        td:first-of-type {
                             padding-right: 30px;
                         }
                     }
