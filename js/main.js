@@ -6,10 +6,11 @@ let unusedUnit = document.querySelector('#unused-unit a');
 let currentTemp = document.querySelector('#current-temp');
 let selectOption;
 let apiKey = '8e1cf7d0e536d5b4b9e3ab3ff361aaf5';
+let apiKey2 = 'a043fe65d728314064a9719e20ff126f';
 let city;
-//let admin;
 let cities;
 let weatherData;
+let forecastData;
 
 // console.log(currentTemp.textContent);
 
@@ -24,14 +25,17 @@ let visibility = document.querySelector('#visibility');
 
 
 async function LoadWeather(lat, lon) {
-    let apiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-    weatherData = await (await fetch(apiPath)).json();
+    let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey2}`;
+
+    weatherData = await (await fetch(weatherApiPath)).json();
+    forecastData = await (await fetch (forecastApiPath)).json();
 
     console.log("Load Weather -> weatherData:");
     console.log(weatherData);
+    console.log("Load Weather -> forecastData:");
+    console.log(forecastData);
     
-    //dodati prognozu za 5 dana
-
     //Setting Weather Data
     console.log('SelectCity -> Click:');
     currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
@@ -43,6 +47,8 @@ async function LoadWeather(lat, lon) {
     humidity.textContent = weatherData.main.humidity;
     visibility.textContent = weatherData.visibility;
     //kada se napravi CSS, dodati promenu pozadine u odnosu na vreme
+    
+    //dodati prognozu za 5 dana
 }
 
 async function LoadCities() {
