@@ -29,6 +29,8 @@ async function LoadWeather(lat, lon) {
 
     console.log("Load Weather -> weatherData:");
     console.log(weatherData);
+    
+    //dodati prognozu za 5 dana
 
     //Setting Weather Data
     console.log('SelectCity -> Click:');
@@ -40,6 +42,7 @@ async function LoadWeather(lat, lon) {
     pressure.textContent = weatherData.main.pressure;
     humidity.textContent = weatherData.main.humidity;
     visibility.textContent = weatherData.visibility;
+    //kada se napravi CSS, dodati promenu pozadine u odnosu na vreme
 }
 
 async function LoadCities() {
@@ -53,7 +56,7 @@ async function LoadCities() {
 function UnitConvert(tempVal, unit) {
     let tempConverted;
 
-    switch (unit) {
+    switch(unit) {
         case 'C':
             tempConverted = Math.floor(tempVal - 273.15);
             break;
@@ -82,7 +85,7 @@ place.addEventListener('click', function(e) {
 });
 
 searcher.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
+    if(e.key === 'Enter') {
         console.log('enter');
         console.log(searcher.value);
         selectCity.selectedIndex = 0;
@@ -92,21 +95,31 @@ searcher.addEventListener('keypress', function(e) {
     }
 });
 
-searcher.addEventListener('keyup', async function() {
-    city = [...cities.filter(ea => {
-        return ea.city.toLowerCase().includes(searcher.value.toLowerCase());
-    }),
-    ...cities.filter(eb=>{
-        return eb.admin_name?.toLowerCase()?.includes(searcher.value.toLowerCase());
-    }),
-    ...cities.filter(ec=>{
-        return ec.city_ascii?.toLowerCase()?.includes(searcher.value.toLowerCase());
-    })];
+searcher.addEventListener('keyup', function() {
+    let searcherVal = searcher.value.replaceAll(',', '$').replaceAll('$ ', '$').split('$');
+    console.log(`Searcher - > KeyUP - > SearcherVal: `);
+    console.log(searcherVal);
+    // new Set u ES6 spaja array ali ne duplira vrednosti
+    city = [...new Set([...cities.filter(ea => {
+            return ea.city.toLowerCase().includes(searcherVal[0].toLowerCase());
+        }),
+        ...cities.filter(eb => {
+            return eb.admin_name?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
+        }),
+        ...cities.filter(ec => {
+            return ec.city_ascii?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
+        })])
+    ];
+    if(searcherVal.length > 1){
+        city = city.filter(e => {
+            return e.country.toLowerCase().includes(searcherVal[1].toLowerCase());
+        })
+    }
 
     console.log(`Searcher - > KeyUP - > City: `);
     console.log(city);
     selectCity.innerHTML = '';
-    if (city.length > 0 && city.length < 10) {
+    if(city.length > 0 && city.length < 10) {
         selectCity.classList.replace('d-none', 'd-block');
         selectCity.setAttribute('size', city.length);
         selectCity.classList.remove('fomr-select');
