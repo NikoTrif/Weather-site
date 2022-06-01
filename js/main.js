@@ -23,9 +23,8 @@ let pressure = document.querySelector('#pressure');
 let humidity = document.querySelector('#humidity');
 let visibility = document.querySelector('#visibility');
 
-
 async function LoadWeather(lat, lon) {
-    let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    // let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey2}`;
 
     weatherData = await (await fetch(weatherApiPath)).json();
@@ -49,6 +48,51 @@ async function LoadWeather(lat, lon) {
     //kada se napravi CSS, dodati promenu pozadine u odnosu na vreme
     
     //dodati prognozu za 5 dana
+    let day = {
+        one: {
+            icon: "",
+            max: '',
+            min: '',
+            wth: ''
+        },
+        two: {
+            icon: "",
+            max: '',
+            min: '',
+            wth: ''
+        },
+        three: {
+            icon: "",
+            max: '',
+            min: '',
+            wth: ''
+        },
+        four: {
+            icon: "",
+            max: '',
+            min: '',
+            wth: ''
+        },
+        five: {
+            icon: "",
+            max: '',
+            min: '',
+            wth: ''
+        }
+    };
+
+    // day.one.max = await forecastData.filter(e => {
+    //     return e.list.dt?.includes(Date.prototype.setDate((Date(Number(Date))+ 1)).toFixed());
+    // });
+
+    // console.log('Load Weather -> day oe max');
+    // console.log(day.one.max);
+
+    console.log('Load Weather -> Days');
+    forecastData.forEach(list.dt, (e) => {
+        console.log(e);
+    });
+
 }
 
 async function LoadCities() {
