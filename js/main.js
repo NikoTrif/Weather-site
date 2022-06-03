@@ -24,7 +24,7 @@ let humidity = document.querySelector('#humidity');
 let visibility = document.querySelector('#visibility');
 
 async function LoadWeather(lat, lon) {
-    // let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey2}`;
 
     weatherData = await (await fetch(weatherApiPath)).json();
@@ -81,18 +81,17 @@ async function LoadWeather(lat, lon) {
         }
     };
 
-    // day.one.max = await forecastData.filter(e => {
-    //     return e.list.dt?.includes(Date.prototype.setDate((Date(Number(Date))+ 1)).toFixed());
-    // });
+    let datum = new Date();
+    console.log("Load Weather -> datum-1:");
+    console.log(datum);
+    datum.setDate(datum.getDate() + 1);
+    console.log("Load Weather -> datum-2:");
+    console.log(datum.toLocaleDateString('sr', {year: 'numeric', month: 'numeric', day: 'numeric'}));
+    //ovde sam stao
 
-    // console.log('Load Weather -> day oe max');
-    // console.log(day.one.max);
-
-    console.log('Load Weather -> Days');
-    forecastData.forEach(list.dt, (e) => {
-        console.log(e);
-    });
-
+    // let fcstDatumi = forecastData.list.filter(e => {
+    //     return e.dt_txt.includes()
+    // })
 }
 
 async function LoadCities() {
@@ -149,7 +148,7 @@ searcher.addEventListener('keyup', function() {
     let searcherVal = searcher.value.replaceAll(',', '$').replaceAll('$ ', '$').split('$');
     console.log(`Searcher - > KeyUP - > SearcherVal: `);
     console.log(searcherVal);
-    // new Set u ES6 spaja array ali ne duplira vrednosti
+    // new Set u ES6 spaja array i ne duplira vrednosti
     city = [...new Set([...cities.filter(ea => {
             return ea.city.toLowerCase().includes(searcherVal[0].toLowerCase());
         }),
