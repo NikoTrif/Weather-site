@@ -11,6 +11,7 @@ let city;
 let cities;
 let weatherData;
 let forecastData;
+let forecast;
 
 // console.log(currentTemp.textContent);
 
@@ -25,16 +26,12 @@ let visibility = document.querySelector('#visibility');
 
 async function LoadWeather(lat, lon) {
     let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-    let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey2}`;
 
     weatherData = await (await fetch(weatherApiPath)).json();
-    forecastData = await (await fetch (forecastApiPath)).json();
 
     console.log("Load Weather -> weatherData:");
     console.log(weatherData);
-    console.log("Load Weather -> forecastData:");
-    console.log(forecastData);
-    
+
     //Setting Weather Data
     console.log('SelectCity -> Click:');
     currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
@@ -46,52 +43,59 @@ async function LoadWeather(lat, lon) {
     humidity.textContent = weatherData.main.humidity;
     visibility.textContent = weatherData.visibility;
     //kada se napravi CSS, dodati promenu pozadine u odnosu na vreme
-    
+
     //dodati prognozu za 5 dana
-    let day = {
-        one: {
-            icon: "",
-            max: '',
-            min: '',
-            wth: ''
-        },
-        two: {
-            icon: "",
-            max: '',
-            min: '',
-            wth: ''
-        },
-        three: {
-            icon: "",
-            max: '',
-            min: '',
-            wth: ''
-        },
-        four: {
-            icon: "",
-            max: '',
-            min: '',
-            wth: ''
-        },
-        five: {
-            icon: "",
-            max: '',
-            min: '',
-            wth: ''
+    await LoadForecast(lat, lon);
+}
+
+async function LoadForecast(lat, lon) {
+    let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&exclude=currrent,hourly,minutely&appid=${apiKey2}`;
+    forecastData = await (await fetch(forecastApiPath)).json();
+
+    console.log("Load Weather -> forecastData:");
+    console.log(forecastData);
+
+    // let datum = new Date();
+    // console.log("Load Weather -> datum-1:");
+    // console.log(datum.toLocaleString('en', {weekday: 'long'}));
+    // datum.setDate(datum.getDate() + 1);
+    // console.log("Load Weather -> datum-2:");
+    // console.log(datum.toLocaleDateString('sr', {year: 'numeric', month: 'numeric', day: 'numeric'}));
+    // console.log("Load Weather -> fprecastDate:");
+    // console.log(new Date(forecastData.list[0].dt *1000));
+
+    let i = 1;
+    forecast = forecastData.list.filter(e => {
+        let dt = new Date(e.dt * 1000);
+        if (dt.getDate() == new Date().getDate() + i) {
+            i++;
+            return e;
         }
-    };
+    });
 
-    let datum = new Date();
-    console.log("Load Weather -> datum-1:");
-    console.log(datum);
-    datum.setDate(datum.getDate() + 1);
-    console.log("Load Weather -> datum-2:");
-    console.log(datum.toLocaleDateString('sr', {year: 'numeric', month: 'numeric', day: 'numeric'}));
+    console.log("Load Forecast -> forecast:");
+    console.log(forecast);
+
+    let y = 0;
+    // Writing forecast table:
+    // Day
+    document.querySelectorAll('table .table-header tr .col').forEach(e => {
+        // console.log("Load Forecast -> eachDate:");
+        // console.log(new Date(forecast));
+
+        e.textContent = new Date(forecast[y].dt * 1000).toLocaleString('en', { weekday: 'long' });
+        y++;
+    });
+
+    y=0;
+    let tableBodyRow = document.querySelectorAll('.forecast-5 table tbody tr');
+    forecast.forEach(e => {
+        tableBodyRow[y].innerHTML = tableBodyRow[y].innerHTML + `<td>Max: ${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContentS}</td>`;
+        tableBodyRow[y].innerHTML = tableBodyRow[y].innerHTML + `<td>Min: ${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContentS}</td>`;
+        y++;
+    });
     //ovde sam stao
-
-    // let fcstDatumi = forecastData.list.filter(e => {
-    //     return e.dt_txt.includes()
-    // })
+    // treba obrnuto, za svaki red treba dodati td sa podacima
 }
 
 async function LoadCities() {
@@ -105,7 +109,7 @@ async function LoadCities() {
 function UnitConvert(tempVal, unit) {
     let tempConverted;
 
-    switch(unit) {
+    switch (unit) {
         case 'C':
             tempConverted = Math.floor(tempVal - 273.15);
             break;
@@ -125,7 +129,7 @@ function UnitConvert(tempVal, unit) {
 LoadCities();
 LoadWeather(44.81, 20.46);
 
-place.addEventListener('click', function(e) {
+place.addEventListener('click', function (e) {
     e.preventDefault();
 
     searcher.classList.toggle('d-none');
@@ -133,8 +137,8 @@ place.addEventListener('click', function(e) {
     searcher.focus();
 });
 
-searcher.addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') {
+searcher.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
         console.log('enter');
         console.log(searcher.value);
         selectCity.selectedIndex = 0;
@@ -144,22 +148,22 @@ searcher.addEventListener('keypress', function(e) {
     }
 });
 
-searcher.addEventListener('keyup', function() {
+searcher.addEventListener('keyup', function () {
     let searcherVal = searcher.value.replaceAll(',', '$').replaceAll('$ ', '$').split('$');
     console.log(`Searcher - > KeyUP - > SearcherVal: `);
     console.log(searcherVal);
     // new Set u ES6 spaja array i ne duplira vrednosti
     city = [...new Set([...cities.filter(ea => {
-            return ea.city.toLowerCase().includes(searcherVal[0].toLowerCase());
-        }),
-        ...cities.filter(eb => {
-            return eb.admin_name?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
-        }),
-        ...cities.filter(ec => {
-            return ec.city_ascii?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
-        })])
+        return ea.city.toLowerCase().includes(searcherVal[0].toLowerCase());
+    }),
+    ...cities.filter(eb => {
+        return eb.admin_name?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
+    }),
+    ...cities.filter(ec => {
+        return ec.city_ascii?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
+    })])
     ];
-    if(searcherVal.length > 1){
+    if (searcherVal.length > 1) {
         city = city.filter(e => {
             return e.country.toLowerCase().includes(searcherVal[1].toLowerCase());
         })
@@ -168,7 +172,7 @@ searcher.addEventListener('keyup', function() {
     console.log(`Searcher - > KeyUP - > City: `);
     console.log(city);
     selectCity.innerHTML = '';
-    if(city.length > 0 && city.length < 10) {
+    if (city.length > 0 && city.length < 10) {
         selectCity.classList.replace('d-none', 'd-block');
         selectCity.setAttribute('size', city.length);
         selectCity.classList.remove('fomr-select');
