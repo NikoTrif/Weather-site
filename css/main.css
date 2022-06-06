@@ -41,9 +41,9 @@ header {
     .container .row .weather-now .details tbody tr td:first-of-type {
       padding-right: 30px; }
 .container .row .forecast-5 {
-  font-size: 10px;
+  font-size: 15px;
   margin-bottom: 20px;
-  overflow: scroll; }
+  text-align: center; }
 .container .row .forecast-30 {
   font-size: 10px;
   overflow: scroll; }

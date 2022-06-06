@@ -9,6 +9,7 @@ let apiKey = '8e1cf7d0e536d5b4b9e3ab3ff361aaf5';
 let apiKey2 = 'a043fe65d728314064a9719e20ff126f';
 let city;
 let cities;
+let coordinates = [44.81, 20.46];
 let weatherData;
 let forecastData;
 let forecast;
@@ -33,7 +34,6 @@ async function LoadWeather(lat, lon) {
     console.log(weatherData);
 
     //Setting Weather Data
-    console.log('SelectCity -> Click:');
     currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
     weather.textContent = weatherData.weather[0].main;
     feel.textContent = UnitConvert(weatherData.main.feels_like, usedUnit.textContent);
@@ -50,7 +50,12 @@ async function LoadWeather(lat, lon) {
 
 async function LoadForecast(lat, lon) {
     let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&exclude=currrent,hourly,minutely&appid=${apiKey2}`;
+    let tableBodyRow = document.querySelectorAll('.forecast-5 table tbody tr');
     forecastData = await (await fetch(forecastApiPath)).json();
+    
+    tableBodyRow.forEach(e => {
+        e.innerHTML = '';
+    })
 
     console.log("Load Weather -> forecastData:");
     console.log(forecastData);
@@ -78,24 +83,17 @@ async function LoadForecast(lat, lon) {
 
     let y = 0;
     // Writing forecast table:
-    // Day
     document.querySelectorAll('table .table-header tr .col').forEach(e => {
-        // console.log("Load Forecast -> eachDate:");
-        // console.log(new Date(forecast));
-
         e.textContent = new Date(forecast[y].dt * 1000).toLocaleString('en', { weekday: 'long' });
         y++;
     });
-
-    y=0;
-    let tableBodyRow = document.querySelectorAll('.forecast-5 table tbody tr');
-    forecast.forEach(e => {
-        tableBodyRow[y].innerHTML = tableBodyRow[y].innerHTML + `<td>Max: ${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContentS}</td>`;
-        tableBodyRow[y].innerHTML = tableBodyRow[y].innerHTML + `<td>Min: ${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContentS}</td>`;
-        y++;
+    
+    forecast.forEach(e => {        
+        tableBodyRow[0].innerHTML = tableBodyRow[0].innerHTML + `<td><img src="http://openweathermap.org/img/wn/${e.weather[0].icon}@2x.png"></td>`;
+        tableBodyRow[1].innerHTML = tableBodyRow[1].innerHTML + `<td>Max:<br>${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
+        tableBodyRow[2].innerHTML = tableBodyRow[2].innerHTML + `<td>Min:<br>${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
     });
     //ovde sam stao
-    // treba obrnuto, za svaki red treba dodati td sa podacima
 }
 
 async function LoadCities() {
@@ -127,7 +125,7 @@ function UnitConvert(tempVal, unit) {
 }
 
 LoadCities();
-LoadWeather(44.81, 20.46);
+LoadWeather(coordinates[0], coordinates[1]);
 
 place.addEventListener('click', function (e) {
     e.preventDefault();
@@ -188,7 +186,7 @@ searcher.addEventListener('keyup', function () {
 });
 
 selectCity.addEventListener('click', () => {
-    let coordinates = selectCity.value.split(',');
+    coordinates = selectCity.value.split(',');
     console.log(selectCity.value);
 
     LoadWeather(coordinates[0], coordinates[1]);
@@ -211,4 +209,5 @@ unusedUnit.addEventListener('click', (e) => {
     currentTemp.textContent = UnitConvert(weatherData.main.temp, usedUnit.textContent);
     feel.textContent = UnitConvert(weatherData.main.feels_like, usedUnit.textContent);
     document.querySelector('#feeling-unit').textContent = usedUnit.textContent;
+    LoadForecast(coordinates[0], coordinates[1]);
 });
