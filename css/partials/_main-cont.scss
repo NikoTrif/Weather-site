@@ -33,12 +33,32 @@
         .forecast-5 {
             font-size: 15px;
             margin-bottom: 20px;
-            //overflow: scroll;
-            text-align: center;
+            .forecast-table {
+                overflow: scroll;
+                table {
+                    text-align: center;
+                }
+            }
         }
         .forecast-30 {
             font-size: 10px;
             overflow: scroll;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        .row {
+            .weather-now {
+                display: flex;
+                .sumary {
+                    justify-content: right;
+                }
+                .details {
+                    justify-content: left;
+                }
+            }
         }
     }
 }
