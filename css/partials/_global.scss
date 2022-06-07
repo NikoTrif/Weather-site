@@ -13,5 +13,8 @@ html {
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
+        position: absolute;
+        width: 100%;
+        min-height: 100%;
     }
 }

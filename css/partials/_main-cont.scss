@@ -1,4 +1,5 @@
 .container {
+    margin-bottom: 10px;
     .row {
         .weather-now {
             margin-bottom: 40px;
@@ -34,7 +35,7 @@
             font-size: 15px;
             margin-bottom: 20px;
             .forecast-table {
-                overflow: scroll;
+                overflow: auto;
                 table {
                     text-align: center;
                 }
@@ -52,11 +53,9 @@
         .row {
             .weather-now {
                 display: flex;
-                .sumary {
-                    justify-content: right;
-                }
-                .details {
-                    justify-content: left;
+                justify-content: space-between;
+                .details{
+                    margin-left: 10px;
                 }
             }
         }
