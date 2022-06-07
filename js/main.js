@@ -78,6 +78,42 @@ async function LoadForecast(lat, lon) {
         }
     });
 
+    //Odvajanje po danima i postavljanje MIN i MAX temperature
+    let fcst = {
+        date: 0,
+        min: 1000,
+        max: 0
+    };
+    
+    let fcstArray = [];
+    i = 1;
+    forecastData.list.forEach(e => {
+        let dt = new Date(e.dt * 1000);
+        let danas = new Date();
+
+        if(dt.getDate() > danas.getDate() + i){
+            fcstArray.push(fcst); //konkretno ovde ne valja, svuda baca isto
+            fcst.min = 1000;
+            fcst.max = 0;
+            console.log("NOVI DAN");
+            i++;
+            //ovde sam stao - uopste se ne upisuje min i max temperatura
+        }
+
+        if (dt.getDate() > danas.getDate() && dt.getDate() <= danas.getDate() + i) {
+            if(e.main.temp_max > fcst.max){
+                fcst.max = e.main.temp_max;
+            }
+            if(e.main.temp_min < fcst.min){
+                fcst.min = e.main.temp_min;
+            }
+            fcst.date = dt.getDate();
+            console.log(dt.getDate());
+        }
+    });
+
+    console.log("Load Forecast -> fcstArray:");
+    console.log(fcstArray);
     console.log("Load Forecast -> forecast:");
     console.log(forecast);
 
@@ -119,8 +155,8 @@ function UnitConvert(tempVal, unit) {
             tempConverted = 'ERROR';
             break;
     }
-    console.log('UNIT CONVERT -> tempConverted');
-    console.log(`${tempConverted} ${unit}`);
+    // console.log('UNIT CONVERT -> tempConverted');
+    // console.log(`${tempConverted} ${unit}`);
     return tempConverted;
 }
 
