@@ -120,7 +120,7 @@ async function LoadForecast(lat, lon) {
     let y = 0;
     // Writing forecast table:
     document.querySelectorAll('table .table-header tr .col').forEach(e => {
-        e.textContent = new Date(forecast[y].dt * 1000).toLocaleString('en', { weekday: 'long' });
+        e.textContent = new Date(forecast[y]?.dt * 1000).toLocaleString('en', { weekday: 'long' });
         y++;
     });
     

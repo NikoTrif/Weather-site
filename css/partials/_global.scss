@@ -8,7 +8,7 @@ html {
     body {
         font-family: $gfont;
         color: #333;
-        background-image: url("../img/clear-day.gif");
+        //background-image: url("../img/clear-day.gif");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -16,5 +16,21 @@ html {
         position: absolute;
         width: 100%;
         min-height: 100%;
+    }
+}
+
+.sunny-day{
+    background-image: url("../img/clear-day.gif");
+    color: #333;
+}
+
+.clear-night{
+    background-image: url("../img/clear-night.gif");
+    color: #fff;
+    a{
+        color: #fff;
+    }
+    table{
+        color: #fff;
     }
 }
