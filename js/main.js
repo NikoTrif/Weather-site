@@ -25,6 +25,13 @@ let pressure = document.querySelector('#pressure');
 let humidity = document.querySelector('#humidity');
 let visibility = document.querySelector('#visibility');
 
+class MiniMax{
+    constructor(){
+        this.min = 1000;
+        this.max = 0;
+    }
+}
+
 async function LoadWeather(lat, lon) {
     let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
@@ -79,25 +86,20 @@ async function LoadForecast(lat, lon) {
     });
 
     //Odvajanje po danima i postavljanje MIN i MAX temperature
-    let fcst = {
-        date: 0,
-        min: 1000,
-        max: 0
-    };
+    let fcst = new MiniMax();
     
     let fcstArray = [];
     i = 1;
     forecastData.list.forEach(e => {
         let dt = new Date(e.dt * 1000);
-        let danas = new Date();
+        let danas = new Date(); // ovde je greska, ova komanda daje lokalno vreme, a u apiju je po grinicu
 
         if(dt.getDate() > danas.getDate() + i){
-            fcstArray.push(fcst); //konkretno ovde ne valja, svuda baca isto
-            fcst.min = 1000;
-            fcst.max = 0;
+            fcstArray.push(fcst);
+            fcst = new MiniMax();
             console.log("NOVI DAN");
             i++;
-            //ovde sam stao - uopste se ne upisuje min i max temperatura
+            //ovde sam stao - sada upisuje temperature ali ne upisuje 5-ti dan
         }
 
         if (dt.getDate() > danas.getDate() && dt.getDate() <= danas.getDate() + i) {
@@ -129,7 +131,6 @@ async function LoadForecast(lat, lon) {
         tableBodyRow[1].innerHTML = tableBodyRow[1].innerHTML + `<td>Max:<br>${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
         tableBodyRow[2].innerHTML = tableBodyRow[2].innerHTML + `<td>Min:<br>${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
     });
-    //ovde sam stao
 }
 
 async function LoadCities() {
