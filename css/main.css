@@ -14,7 +14,7 @@ html body {
   width: 100%;
   min-height: 100%; }
 
-.sunny-day {
+.clear-day {
   background-image: url("../img/clear-day.gif");
   color: #333; }
 
@@ -24,6 +24,54 @@ html body {
   .clear-night a {
     color: #fff; }
   .clear-night table {
+    color: #fff; }
+
+.cloudy-day {
+  background-image: url("../img/cloudy-day.gif");
+  color: #fff; }
+  .cloudy-day a {
+    color: #fff; }
+  .cloudy-day table {
+    color: #fff; }
+
+.cloudy-night {
+  background-image: url("../img/cloudy-night.gif");
+  color: #fff; }
+  .cloudy-night a {
+    color: #fff; }
+  .cloudy-night table {
+    color: #fff; }
+
+.rainy-day {
+  background-image: url("../img/rainy-day.gif");
+  color: #fff; }
+  .rainy-day a {
+    color: #fff; }
+  .rainy-day table {
+    color: #fff; }
+
+.rainy-night {
+  background-image: url("../img/rainy-night.gif");
+  color: #fff; }
+  .rainy-night a {
+    color: #fff; }
+  .rainy-night table {
+    color: #fff; }
+
+.thunderstorm-day {
+  background-image: url("../img/thunderstorm-day.gif");
+  color: #fff; }
+  .thunderstorm-day a {
+    color: #fff; }
+  .thunderstorm-day table {
+    color: #fff; }
+
+.thunderstorm-night {
+  background-image: url("../img/thunderstorm-night.gif");
+  color: #fff; }
+  .thunderstorm-night a {
+    color: #fff; }
+  .thunderstorm-night table {
     color: #fff; }
 
 header {
