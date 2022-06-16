@@ -12,7 +12,7 @@ let cities;
 let coordinates = [44.81, 20.46];
 let weatherData;
 let forecastData;
-let forecast;
+// let forecast;
 
 // console.log(currentTemp.textContent);
 
@@ -27,8 +27,10 @@ let visibility = document.querySelector('#visibility');
 
 class MiniMax {
     constructor() {
+        this.date = new Date();
         this.min = 1000;
         this.max = 0;
+        this.icon = '';
     }
 }
 
@@ -67,29 +69,20 @@ async function LoadForecast(lat, lon) {
     console.log("Load Weather -> forecastData:");
     console.log(forecastData);
 
-    // let datum = new Date();
-    // console.log("Load Weather -> datum-1:");
-    // console.log(datum.toLocaleString('en', {weekday: 'long'}));
-    // datum.setDate(datum.getDate() + 1);
-    // console.log("Load Weather -> datum-2:");
-    // console.log(datum.toLocaleDateString('sr', {year: 'numeric', month: 'numeric', day: 'numeric'}));
-    // console.log("Load Weather -> fprecastDate:");
-    // console.log(new Date(forecastData.list[0].dt *1000));
+    // let i = 1;
+    // forecast = forecastData.list.filter(e => {
+    //     let dt = new Date(e.dt * 1000);
+    //     if (dt.getDate() == new Date().getDate() + i) {
+    //         i++;
+    //         return e;
+    //     }
+    // });
 
-    let i = 1;
-    forecast = forecastData.list.filter(e => {
-        let dt = new Date(e.dt * 1000);
-        if (dt.getDate() == new Date().getDate() + i) {
-            i++;
-            return e;
-        }
-    });
-
-    //Odvajanje po danima i postavljanje MIN i MAX temperature
+    // Setting Min and Max Temperature
     let fcst = new MiniMax();
-
     let fcstArray = [];
     i = 0;
+
     forecastData.list.forEach((e, index) => {
         let dt = new Date(e.dt * 1000);
         let dt2 = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
@@ -101,42 +94,51 @@ async function LoadForecast(lat, lon) {
             fcst = new MiniMax();
             console.log("NOVI DAN");
             i++;
-            //ovde sam stao - sada upisuje temperature ali ne upisuje 5-ti dan
-            }
+        }
 
-            if (dt2 >= danas2) {
-              if (e.main.temp_max > fcst.max) {
+        if (dt2 >= danas2) {
+            if (e.main.temp_max > fcst.max) {
                 fcst.max = e.main.temp_max;
-              }
-              if (e.main.temp_min < fcst.min) {
+            }
+            if (e.main.temp_min < fcst.min) {
                 fcst.min = e.main.temp_min;
-              }
-              fcst.date = dt;
             }
 
-            if (index === forecastData.list.length - 1) {
-                fcstArray.push(fcst);
-                fcstArray.shift();
+            fcst.date = dt2;
+
+            if(dt.getUTCHours() === 12){
+                fcst.icon = e.weather[0].icon;
             }
+        }        
+
+        if (index === forecastData.list.length - 1) {
+            fcstArray.push(fcst);
+            fcstArray.shift();
+        }
     });
 
     console.log("Load Forecast -> fcstArray:");
     console.log(fcstArray);
-    console.log("Load Forecast -> forecast:");
-    console.log(forecast);
+    // console.log("Load Forecast -> forecast:");
+    // console.log(forecast);
 
     let y = 0;
     // Writing forecast table:
     document.querySelectorAll('table .table-header tr .col').forEach(e => {
-        e.textContent = new Date(forecast[y]?.dt * 1000).toLocaleString('en', { weekday: 'long' });
+        e.textContent = new Date(fcstArray[y]?.date).toLocaleString('en', { weekday: 'long' });
         y++;
     });
 
-    forecast.forEach(e => {
-        tableBodyRow[0].innerHTML = tableBodyRow[0].innerHTML + `<td><img src="http://openweathermap.org/img/wn/${e.weather[0].icon}@2x.png"></td>`;
-        tableBodyRow[1].innerHTML = tableBodyRow[1].innerHTML + `<td>Max:<br>${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
-        tableBodyRow[2].innerHTML = tableBodyRow[2].innerHTML + `<td>Min:<br>${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
-    });
+    // forecast.forEach(e => {
+    //     tableBodyRow[0].innerHTML = tableBodyRow[0].innerHTML + `<td><img src="http://openweathermap.org/img/wn/${e.weather[0].icon}@2x.png"></td>`;
+    //     tableBodyRow[1].innerHTML = tableBodyRow[1].innerHTML + `<td>Max:<br>${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
+    //     tableBodyRow[2].innerHTML = tableBodyRow[2].innerHTML + `<td>Min:<br>${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
+    // });
+    fcstArray.forEach(e => {
+        tableBodyRow[0].innerHTML = tableBodyRow[0].innerHTML + `<td><img src="http://openweathermap.org/img/wn/${e.icon}@2x.png"></td>`;
+        tableBodyRow[1].innerHTML = tableBodyRow[1].innerHTML + `<td>Max:<br>${UnitConvert(e.max, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
+        tableBodyRow[2].innerHTML = tableBodyRow[2].innerHTML + `<td>Min:<br>${UnitConvert(e.min, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
+    })
 }
 
 async function LoadCities() {
