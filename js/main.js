@@ -25,8 +25,8 @@ let pressure = document.querySelector('#pressure');
 let humidity = document.querySelector('#humidity');
 let visibility = document.querySelector('#visibility');
 
-class MiniMax{
-    constructor(){
+class MiniMax {
+    constructor() {
         this.min = 1000;
         this.max = 0;
     }
@@ -59,7 +59,7 @@ async function LoadForecast(lat, lon) {
     let forecastApiPath = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&exclude=currrent,hourly,minutely&appid=${apiKey2}`;
     let tableBodyRow = document.querySelectorAll('.forecast-5 table tbody tr');
     forecastData = await (await fetch(forecastApiPath)).json();
-    
+
     tableBodyRow.forEach(e => {
         e.innerHTML = '';
     })
@@ -86,42 +86,38 @@ async function LoadForecast(lat, lon) {
     });
 
     //Odvajanje po danima i postavljanje MIN i MAX temperature
-    let fcst;
-    
+    let fcst = new MiniMax();
+
     let fcstArray = [];
     i = 0;
-    forecastData.list.forEach(e => {
-        let dt = new Date(e.dt * 1000).getDate();
-        let danas = new Date().getUTCDate();
+    forecastData.list.forEach((e, index) => {
+        let dt = new Date(e.dt * 1000);
+        let dt2 = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+        let danas = new Date();
+        let danas2 = new Date(danas.getFullYear(), danas.getMonth(), danas.getDate() + i);
 
-
-
-        if (dt > danas + i) {
+        if (dt2 > danas2) {
             fcstArray.push(fcst);
             fcst = new MiniMax();
             console.log("NOVI DAN");
             i++;
             //ovde sam stao - sada upisuje temperature ali ne upisuje 5-ti dan
-        //}
+            }
 
-        //if (dt > danas) {
-            if (e.main.temp_max > fcst.max) {
+            if (dt2 >= danas2) {
+              if (e.main.temp_max > fcst.max) {
                 fcst.max = e.main.temp_max;
-            }
-            if (e.main.temp_min < fcst.min) {
+              }
+              if (e.main.temp_min < fcst.min) {
                 fcst.min = e.main.temp_min;
+              }
+              fcst.date = dt;
             }
-            fcst.date = dt;
-            console.log(dt);
-        }
 
-        // if (dt > danas + i) {
-        //     fcstArray.push(fcst);
-        //     fcst = new MiniMax();
-        //     console.log("NOVI DAN");
-        //     i++;
-        //     //ovde sam stao - sada upisuje temperature ali ne upisuje 5-ti dan
-        // }
+            if (index === forecastData.list.length - 1) {
+                fcstArray.push(fcst);
+                fcstArray.shift();
+            }
     });
 
     console.log("Load Forecast -> fcstArray:");
@@ -135,8 +131,8 @@ async function LoadForecast(lat, lon) {
         e.textContent = new Date(forecast[y]?.dt * 1000).toLocaleString('en', { weekday: 'long' });
         y++;
     });
-    
-    forecast.forEach(e => {        
+
+    forecast.forEach(e => {
         tableBodyRow[0].innerHTML = tableBodyRow[0].innerHTML + `<td><img src="http://openweathermap.org/img/wn/${e.weather[0].icon}@2x.png"></td>`;
         tableBodyRow[1].innerHTML = tableBodyRow[1].innerHTML + `<td>Max:<br>${UnitConvert(e.main.temp_max, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
         tableBodyRow[2].innerHTML = tableBodyRow[2].innerHTML + `<td>Min:<br>${UnitConvert(e.main.temp_min, usedUnit.textContent)}° ${usedUnit.textContent}</td>`;
@@ -174,7 +170,7 @@ function UnitConvert(tempVal, unit) {
 LoadCities();
 LoadWeather(coordinates[0], coordinates[1]);
 
-place.addEventListener('click', function (e) {
+place.addEventListener('click', function(e) {
     e.preventDefault();
 
     searcher.classList.toggle('d-none');
@@ -182,7 +178,7 @@ place.addEventListener('click', function (e) {
     searcher.focus();
 });
 
-searcher.addEventListener('keypress', function (e) {
+searcher.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         console.log('enter');
         console.log(searcher.value);
@@ -193,21 +189,21 @@ searcher.addEventListener('keypress', function (e) {
     }
 });
 
-searcher.addEventListener('keyup', function () {
+searcher.addEventListener('keyup', function() {
     let searcherVal = searcher.value.replaceAll(',', '$').replaceAll('$ ', '$').split('$');
     console.log(`Searcher - > KeyUP - > SearcherVal: `);
     console.log(searcherVal);
     // new Set u ES6 spaja array i ne duplira vrednosti
     city = [...new Set([...cities.filter(ea => {
-        return ea.city.toLowerCase().includes(searcherVal[0].toLowerCase());
-    }),
-    ...cities.filter(eb => {
-        return eb.admin_name?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
-    }),
-    ...cities.filter(ec => {
-        return ec.city_ascii?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
-    })])
-    ];
+            return ea.city.toLowerCase().includes(searcherVal[0].toLowerCase());
+        }),
+        ...cities.filter(eb => {
+            return eb.admin_name?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
+        }),
+        ...cities.filter(ec => {
+            return ec.city_ascii?.toLowerCase()?.includes(searcherVal[0].toLowerCase());
+        })
+    ])];
     if (searcherVal.length > 1) {
         city = city.filter(e => {
             return e.country.toLowerCase().includes(searcherVal[1].toLowerCase());
