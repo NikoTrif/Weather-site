@@ -86,32 +86,42 @@ async function LoadForecast(lat, lon) {
     });
 
     //Odvajanje po danima i postavljanje MIN i MAX temperature
-    let fcst = new MiniMax();
+    let fcst;
     
     let fcstArray = [];
-    i = 1;
+    i = 0;
     forecastData.list.forEach(e => {
-        let dt = new Date(e.dt * 1000);
-        let danas = new Date(); // ovde je greska, ova komanda daje lokalno vreme, a u apiju je po grinicu
+        let dt = new Date(e.dt * 1000).getDate();
+        let danas = new Date().getUTCDate();
 
-        if(dt.getDate() > danas.getDate() + i){
+
+
+        if (dt > danas + i) {
             fcstArray.push(fcst);
             fcst = new MiniMax();
             console.log("NOVI DAN");
             i++;
             //ovde sam stao - sada upisuje temperature ali ne upisuje 5-ti dan
-        }
+        //}
 
-        if (dt.getDate() > danas.getDate() && dt.getDate() <= danas.getDate() + i) {
-            if(e.main.temp_max > fcst.max){
+        //if (dt > danas) {
+            if (e.main.temp_max > fcst.max) {
                 fcst.max = e.main.temp_max;
             }
-            if(e.main.temp_min < fcst.min){
+            if (e.main.temp_min < fcst.min) {
                 fcst.min = e.main.temp_min;
             }
-            fcst.date = dt.getDate();
-            console.log(dt.getDate());
+            fcst.date = dt;
+            console.log(dt);
         }
+
+        // if (dt > danas + i) {
+        //     fcstArray.push(fcst);
+        //     fcst = new MiniMax();
+        //     console.log("NOVI DAN");
+        //     i++;
+        //     //ovde sam stao - sada upisuje temperature ali ne upisuje 5-ti dan
+        // }
     });
 
     console.log("Load Forecast -> fcstArray:");
