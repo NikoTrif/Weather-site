@@ -4,6 +4,7 @@ let selectCity = document.getElementById("citySelect");
 let usedUnit = document.querySelector('#used-unit');
 let unusedUnit = document.querySelector('#unused-unit a');
 let currentTemp = document.querySelector('#current-temp');
+let body = document.querySelector('body');
 let selectOption;
 let apiKey = '8e1cf7d0e536d5b4b9e3ab3ff361aaf5';
 let apiKey2 = 'a043fe65d728314064a9719e20ff126f';
@@ -25,6 +26,11 @@ let pressure = document.querySelector('#pressure');
 let humidity = document.querySelector('#humidity');
 let visibility = document.querySelector('#visibility');
 
+LoadCities();
+LoadWeather(coordinates[0], coordinates[1]);
+
+//////////////////////////// CONSTRUCTORS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 class MiniMax {
     constructor() {
         this.date = new Date();
@@ -33,6 +39,8 @@ class MiniMax {
         this.icon = '';
     }
 }
+
+//////////////////////////// MAIN FUNCTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 async function LoadWeather(lat, lon) {
     let weatherApiPath = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
@@ -51,6 +59,9 @@ async function LoadWeather(lat, lon) {
     pressure.textContent = weatherData.main.pressure;
     humidity.textContent = weatherData.main.humidity;
     visibility.textContent = weatherData.visibility;
+
+    body.removeAttribute('class');
+    body.classList.add(SetBackground(weatherData.weather[0].id, new Date(weatherData.sys.sunrise * 1000), new Date(weatherData.sys.sunset * 1000)));
     //kada se napravi CSS, dodati promenu pozadine u odnosu na vreme
 
     //dodati prognozu za 5 dana
@@ -66,7 +77,7 @@ async function LoadForecast(lat, lon) {
         e.innerHTML = '';
     })
 
-    console.log("Load Weather -> forecastData:");
+    console.log("Load Forecast -> forecastData:");
     console.log(forecastData);
 
     // let i = 1;
@@ -169,8 +180,62 @@ function UnitConvert(tempVal, unit) {
     return tempConverted;
 }
 
-LoadCities();
-LoadWeather(coordinates[0], coordinates[1]);
+function SetBackground(weatherID, dawn, dusk) {
+    let weatherCondition = '';
+    let daytime = '';
+    let firstNum = 0;
+    let sad = new Date();
+
+
+    if(weatherID === 800 || weatherID === 801 || weatherID === 802){
+        firstNum = 800;
+    }
+    else{
+        firstNum = Number(String(weatherID)[0]);
+    }
+
+    // className construction FIRST part
+    switch (firstNum) {
+        case 2:
+            weatherCondition = 'thunderstorm'
+            break;
+        case 3:
+            weatherCondition = 'rainy'
+            break;
+        case 5:
+            weatherCondition = 'rainy'
+            break;
+        case 6:
+            weatherCondition = 'snow'
+            break;
+        case 7:
+            weatherCondition = 'misty'
+            break;
+        case 800:
+            weatherCondition = 'clear'
+            break;
+        case 8:
+            weatherCondition = 'cloudy'
+            break;
+    
+        default:
+            weatherCondition = 'clear'
+            break;
+    }
+
+    // className construction SECOND part
+    if(sad >= dawn && sad < dusk){
+        daytime = 'day';
+    }
+    else{
+        daytime = 'night'
+    }
+
+
+    return `${weatherCondition}-${daytime}`;
+}
+
+//////////////////////////// EVENTS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 place.addEventListener('click', function(e) {
     e.preventDefault();
