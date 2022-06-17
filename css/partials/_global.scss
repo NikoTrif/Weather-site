@@ -21,82 +21,130 @@ html {
 
 .clear-day{
     background-image: url("../img/clear-day.gif");
-    color: #333;
+    color: $clear-d
 }
 
 .clear-night{
     background-image: url("../img/clear-night.gif");
-    color: #fff;
+    color: $clear-n;
     a{
-        color: #fff;
+        color: $clear-n;
     }
     table{
-        color: #fff;
+        color: $clear-n;
     }
 }
 
 .cloudy-day{
     background-image: url("../img/cloudy-day.gif");
-    color: #fff;
+    color: $cloudy-d;
     a{
-        color: #fff;
+        color: $cloudy-d;
     }
     table{
-        color: #fff;
+        color: $cloudy-d;
     }
 }
 
 .cloudy-night{
     background-image: url("../img/cloudy-night.gif");
-    color: #fff;
+    color: $cloudy-n;
     a{
-        color: #fff;
+        color: $cloudy-n;
     }
     table{
-        color: #fff;
+        color: $cloudy-n;
+    }
+}
+
+.misty-day{
+    background-image: url("../img/misty-day.gif");
+    color: $misty-d;
+    a{
+        color: $misty-d;
+    }
+    table{
+        color: $misty-d;
+    }
+}
+
+.misty-night{
+    background-image: url("../img/misty-night.gif");
+    color: $misty-n;
+    a{
+        color: $misty-n;
+    }
+    table{
+        color: $misty-n;
     }
 }
 
 .rainy-day{
     background-image: url("../img/rainy-day.gif");
-    color: #fff;
+    color: $rainy-d;
     a{
-        color: #fff;
+        color: $rainy-d;
     }
     table{
-        color: #fff;
+        color: $rainy-d;
     }
 }
 
 .rainy-night{
     background-image: url("../img/rainy-night.gif");
-    color: #fff;
+    color: $rainy-n;
     a{
-        color: #fff;
+        color: $rainy-n;
     }
     table{
-        color: #fff;
+        color: $rainy-n;
+    }
+}
+
+.snow-day{
+    background-image: url("../img/snow-day.gif");
+    font-weight: bold;
+    color: $snow-d;
+    a{
+        color: $snow-d;
+    }
+    main {
+        backdrop-filter: blur(50px);
+    }
+    table{
+        color: $snow-d;
+    }
+}
+
+.snow-night{
+    background-image: url("../img/snow-night.gif");
+    color: $snow-n;
+    a{
+        color: $snow-n;
+    }
+    table{
+        color: $snow-n;
     }
 }
 
 .thunderstorm-day{
     background-image: url("../img/thunderstorm-day.gif");
-    color: #fff;
+    color: $thunderstorm-d;
     a{
-        color: #fff;
+        color: $thunderstorm-d;
     }
     table{
-        color: #fff;
+        color: $thunderstorm-d;
     }
 }
 
 .thunderstorm-night{
     background-image: url("../img/thunderstorm-night.gif");
-    color: #fff;
+    color: $thunderstorm-n;
     a{
-        color: #fff;
+        color: $thunderstorm-n;
     }
     table{
-        color: #fff;
+        color: $thunderstorm-n;
     }
 }

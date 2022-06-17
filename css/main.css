@@ -42,6 +42,22 @@ html body {
   .cloudy-night table {
     color: #fff; }
 
+.misty-day {
+  background-image: url("../img/misty-day.gif");
+  color: #333; }
+  .misty-day a {
+    color: #333; }
+  .misty-day table {
+    color: #333; }
+
+.misty-night {
+  background-image: url("../img/misty-night.gif");
+  color: #fff; }
+  .misty-night a {
+    color: #fff; }
+  .misty-night table {
+    color: #fff; }
+
 .rainy-day {
   background-image: url("../img/rainy-day.gif");
   color: #fff; }
@@ -57,6 +73,25 @@ html body {
     color: #fff; }
   .rainy-night table {
     color: #fff; }
+
+.snow-day {
+  background-image: url("../img/snow-day.gif");
+  font-weight: bold;
+  color: #fff; }
+  .snow-day a {
+    color: #fff; }
+  .snow-day main {
+    backdrop-filter: blur(50px); }
+  .snow-day table {
+    color: #fff; }
+
+.snow-night {
+  background-image: url("../img/snow-night.gif");
+  color: #73edfd; }
+  .snow-night a {
+    color: #73edfd; }
+  .snow-night table {
+    color: #73edfd; }
 
 .thunderstorm-day {
   background-image: url("../img/thunderstorm-day.gif");
@@ -76,8 +111,7 @@ html body {
 
 header {
   margin: 30px 0;
-  text-align: center;
-  backdrop-filter: blur(10px); }
+  text-align: center; }
   header .wrapper {
     position: relative;
     display: grid;
