@@ -1,150 +1,174 @@
 html {
-    a {
-        color: #333;
-         :hover {
-            color: #333;
-        }
+  a {
+    color: #333;
+
+    :hover {
+      color: #333;
     }
-    body {
-        font-family: $gfont;
-        color: #333;
-        //background-image: url("../img/clear-day.gif");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
-        position: absolute;
-        width: 100%;
-        min-height: 100%;
-    }
+  }
+
+  body {
+    font-family: $gfont;
+    color: #333;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+  }
 }
 
-.clear-day{
-    background-image: url("../img/clear-day.gif");
-    color: $clear-d
+.clear-day {
+  background-image: url("../img/clear-day.gif");
+  color: $clear-d;
 }
 
-.clear-night{
-    background-image: url("../img/clear-night.gif");
+.clear-night {
+  background-image: url("../img/clear-night.gif");
+  color: $clear-n;
+
+  a {
     color: $clear-n;
-    a{
-        color: $clear-n;
-    }
-    table{
-        color: $clear-n;
-    }
+  }
+
+  table {
+    color: $clear-n;
+  }
 }
 
-.cloudy-day{
-    background-image: url("../img/cloudy-day.gif");
+.cloudy-day {
+  background-image: url("../img/cloudy-day.gif");
+  color: $cloudy-d;
+
+  a {
     color: $cloudy-d;
-    a{
-        color: $cloudy-d;
-    }
-    table{
-        color: $cloudy-d;
-    }
+  }
+
+  table {
+    color: $cloudy-d;
+  }
 }
 
-.cloudy-night{
-    background-image: url("../img/cloudy-night.gif");
+.cloudy-night {
+  background-image: url("../img/cloudy-night.gif");
+  color: $cloudy-n;
+
+  a {
     color: $cloudy-n;
-    a{
-        color: $cloudy-n;
-    }
-    table{
-        color: $cloudy-n;
-    }
+  }
+
+  table {
+    color: $cloudy-n;
+  }
 }
 
-.misty-day{
-    background-image: url("../img/misty-day.gif");
+.misty-day {
+  background-image: url("../img/misty-day.gif");
+  color: $misty-d;
+
+  a {
     color: $misty-d;
-    a{
-        color: $misty-d;
-    }
-    table{
-        color: $misty-d;
-    }
+  }
+
+  table {
+    color: $misty-d;
+  }
 }
 
-.misty-night{
-    background-image: url("../img/misty-night.gif");
+.misty-night {
+  background-image: url("../img/misty-night.gif");
+  color: $misty-n;
+
+  a {
     color: $misty-n;
-    a{
-        color: $misty-n;
-    }
-    table{
-        color: $misty-n;
-    }
+  }
+
+  table {
+    color: $misty-n;
+  }
 }
 
-.rainy-day{
-    background-image: url("../img/rainy-day.gif");
+.rainy-day {
+  background-image: url("../img/rainy-day.gif");
+  color: $rainy-d;
+
+  a {
     color: $rainy-d;
-    a{
-        color: $rainy-d;
-    }
-    table{
-        color: $rainy-d;
-    }
+  }
+
+  table {
+    color: $rainy-d;
+  }
 }
 
-.rainy-night{
-    background-image: url("../img/rainy-night.gif");
+.rainy-night {
+  background-image: url("../img/rainy-night.gif");
+  color: $rainy-n;
+
+  a {
     color: $rainy-n;
-    a{
-        color: $rainy-n;
-    }
-    table{
-        color: $rainy-n;
-    }
+  }
+
+  table {
+    color: $rainy-n;
+  }
 }
 
-.snow-day{
-    background-image: url("../img/snow-day.gif");
-    font-weight: bold;
+.snow-day {
+  background-image: url("../img/snow-day.gif");
+  font-weight: bold;
+  color: $snow-d;
+
+  a {
     color: $snow-d;
-    a{
-        color: $snow-d;
-    }
-    main {
-        backdrop-filter: blur(50px);
-    }
-    table{
-        color: $snow-d;
-    }
+  }
+
+  main {
+    backdrop-filter: blur(50px);
+  }
+
+  table {
+    color: $snow-d;
+  }
 }
 
-.snow-night{
-    background-image: url("../img/snow-night.gif");
+.snow-night {
+  background-image: url("../img/snow-night.gif");
+  color: $snow-n;
+
+  a {
     color: $snow-n;
-    a{
-        color: $snow-n;
-    }
-    table{
-        color: $snow-n;
-    }
+  }
+
+  table {
+    color: $snow-n;
+  }
 }
 
-.thunderstorm-day{
-    background-image: url("../img/thunderstorm-day.gif");
+.thunderstorm-day {
+  background-image: url("../img/thunderstorm-day.gif");
+  color: $thunderstorm-d;
+
+  a {
     color: $thunderstorm-d;
-    a{
-        color: $thunderstorm-d;
-    }
-    table{
-        color: $thunderstorm-d;
-    }
+  }
+
+  table {
+    color: $thunderstorm-d;
+  }
 }
 
-.thunderstorm-night{
-    background-image: url("../img/thunderstorm-night.gif");
+.thunderstorm-night {
+  background-image: url("../img/thunderstorm-night.gif");
+  color: $thunderstorm-n;
+
+  a {
     color: $thunderstorm-n;
-    a{
-        color: $thunderstorm-n;
-    }
-    table{
-        color: $thunderstorm-n;
-    }
+  }
+
+  table {
+    color: $thunderstorm-n;
+  }
 }
