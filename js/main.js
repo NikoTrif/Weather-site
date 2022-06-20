@@ -14,7 +14,6 @@ let coordinates = [44.81, 20.46];
 let weatherData;
 let forecastData;
 
-let temp;
 let weather = document.querySelector("#current-weather");
 let feel = document.querySelector("#current-feeling");
 let windSpeed = document.querySelector("#wind-speed");
