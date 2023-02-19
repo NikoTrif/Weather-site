@@ -278,7 +278,7 @@ searcher.addEventListener("keyup", function () {
     console.log(`Searcher - > KeyUP - > City: `);
     console.log(city);
     selectCity.innerHTML = "";
-    if (city.length > 0 && city.length < 10) {
+    if (city.length > 0 && city.length < 1000) {
         selectCity.classList.replace("d-none", "d-block");
         selectCity.setAttribute("size", city.length);
         selectCity.classList.remove("fomr-select");

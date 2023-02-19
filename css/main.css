@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 html a {
-  color: #333; }
-  html a :hover {
-    color: #333; }
+  color: #333;
+}
+html a :hover {
+  color: #333;
+}
 html body {
   font-family: "Libre Baskerville", serif;
   color: #333;
@@ -12,149 +14,206 @@ html body {
   background-size: cover;
   position: absolute;
   width: 100%;
-  min-height: 100%; }
+  min-height: 100%;
+}
 
 .clear-day {
   background-image: url("../img/clear-day.gif");
-  color: #333; }
+  color: #333;
+}
 
 .clear-night {
   background-image: url("../img/clear-night.gif");
-  color: #fff; }
-  .clear-night a {
-    color: #fff; }
-  .clear-night table {
-    color: #fff; }
+  color: #fff;
+}
+.clear-night a {
+  color: #fff;
+}
+.clear-night table {
+  color: #fff;
+}
 
 .cloudy-day {
   background-image: url("../img/cloudy-day.gif");
-  color: #fff; }
-  .cloudy-day a {
-    color: #fff; }
-  .cloudy-day table {
-    color: #fff; }
+  color: #fff;
+}
+.cloudy-day a {
+  color: #fff;
+}
+.cloudy-day table {
+  color: #fff;
+}
 
 .cloudy-night {
   background-image: url("../img/cloudy-night.gif");
-  color: #fff; }
-  .cloudy-night a {
-    color: #fff; }
-  .cloudy-night table {
-    color: #fff; }
+  color: #fff;
+}
+.cloudy-night a {
+  color: #fff;
+}
+.cloudy-night table {
+  color: #fff;
+}
 
 .misty-day {
   background-image: url("../img/misty-day.gif");
-  color: #333; }
-  .misty-day a {
-    color: #333; }
-  .misty-day table {
-    color: #333; }
+  color: #333;
+}
+.misty-day a {
+  color: #333;
+}
+.misty-day table {
+  color: #333;
+}
 
 .misty-night {
   background-image: url("../img/misty-night.gif");
-  color: #fff; }
-  .misty-night a {
-    color: #fff; }
-  .misty-night table {
-    color: #fff; }
+  color: #fff;
+}
+.misty-night a {
+  color: #fff;
+}
+.misty-night table {
+  color: #fff;
+}
 
 .rainy-day {
   background-image: url("../img/rainy-day.gif");
-  color: #fff; }
-  .rainy-day a {
-    color: #fff; }
-  .rainy-day table {
-    color: #fff; }
+  color: #fff;
+}
+.rainy-day a {
+  color: #fff;
+}
+.rainy-day table {
+  color: #fff;
+}
 
 .rainy-night {
   background-image: url("../img/rainy-night.gif");
-  color: #fff; }
-  .rainy-night a {
-    color: #fff; }
-  .rainy-night table {
-    color: #fff; }
+  color: #fff;
+}
+.rainy-night a {
+  color: #fff;
+}
+.rainy-night table {
+  color: #fff;
+}
 
 .snow-day {
   background-image: url("../img/snow-day.gif");
   font-weight: bold;
-  color: #fff; }
-  .snow-day a {
-    color: #fff; }
-  .snow-day main {
-    backdrop-filter: blur(50px); }
-  .snow-day table {
-    color: #fff; }
+  color: #fff;
+}
+.snow-day a {
+  color: #fff;
+}
+.snow-day main {
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+}
+.snow-day table {
+  color: #fff;
+}
 
 .snow-night {
   background-image: url("../img/snow-night.gif");
-  color: #73edfd; }
-  .snow-night a {
-    color: #73edfd; }
-  .snow-night table {
-    color: #73edfd; }
+  color: #73edfd;
+}
+.snow-night a {
+  color: #73edfd;
+}
+.snow-night table {
+  color: #73edfd;
+}
 
 .thunderstorm-day {
   background-image: url("../img/thunderstorm-day.gif");
-  color: #fff; }
-  .thunderstorm-day a {
-    color: #fff; }
-  .thunderstorm-day table {
-    color: #fff; }
+  color: #fff;
+}
+.thunderstorm-day a {
+  color: #fff;
+}
+.thunderstorm-day table {
+  color: #fff;
+}
 
 .thunderstorm-night {
   background-image: url("../img/thunderstorm-night.gif");
-  color: #fff; }
-  .thunderstorm-night a {
-    color: #fff; }
-  .thunderstorm-night table {
-    color: #fff; }
+  color: #fff;
+}
+.thunderstorm-night a {
+  color: #fff;
+}
+.thunderstorm-night table {
+  color: #fff;
+}
 
 header {
   margin: 30px 0;
-  text-align: center; }
-  header .wrapper {
-    position: relative;
-    display: grid;
-    place-items: center;
-    height: 50px; }
-    header .wrapper .form-control {
-      width: 300px; }
-    header .wrapper .form-select {
-      width: 300px;
-      z-index: 100;
-      overflow-y: hidden; }
+  text-align: center;
+}
+header .wrapper {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 50px;
+}
+header .wrapper .form-control {
+  width: 300px;
+}
+header .wrapper .form-select {
+  width: 300px;
+  height: 200px;
+  z-index: 100;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
 .container {
-  margin-bottom: 10px; }
-  .container .row .weather-now {
-    margin-bottom: 40px; }
-    .container .row .weather-now .sumary h2 {
-      font-size: 70px; }
-      .container .row .weather-now .sumary h2 #unused-unit {
-        font-size: 15px; }
-        .container .row .weather-now .sumary h2 #unused-unit a {
-          text-decoration: none; }
-    .container .row .weather-now .details tbody tr {
-      line-height: 3; }
-      .container .row .weather-now .details tbody tr td:first-of-type {
-        padding-right: 30px; }
-  .container .row .forecast-5 {
-    font-size: 15px;
-    margin-bottom: 20px; }
-    .container .row .forecast-5 .forecast-table {
-      overflow: auto; }
-      .container .row .forecast-5 .forecast-table table {
-        text-align: center; }
-  .container .row .forecast-30 {
-    font-size: 10px;
-    overflow: scroll; }
+  margin-bottom: 10px;
+}
+.container .row .weather-now {
+  margin-bottom: 40px;
+}
+.container .row .weather-now .sumary h2 {
+  font-size: 70px;
+}
+.container .row .weather-now .sumary h2 #unused-unit {
+  font-size: 15px;
+}
+.container .row .weather-now .sumary h2 #unused-unit a {
+  text-decoration: none;
+}
+.container .row .weather-now .details tbody tr {
+  line-height: 3;
+}
+.container .row .weather-now .details tbody tr td:first-of-type {
+  padding-right: 30px;
+}
+.container .row .forecast-5 {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.container .row .forecast-5 .forecast-table {
+  overflow: auto;
+}
+.container .row .forecast-5 .forecast-table table {
+  text-align: center;
+}
+.container .row .forecast-30 {
+  font-size: 10px;
+  overflow: scroll;
+}
 
 @media (min-width: 1024px) {
   .container .row .weather-now {
     display: flex;
-    justify-content: space-between; }
-    .container .row .weather-now .details {
-      margin-left: 10px; } }
+    justify-content: space-between;
+  }
+  .container .row .weather-now .details {
+    margin-left: 10px;
+  }
+}
 footer {
   position: absolute;
   width: 100%;
@@ -163,6 +222,5 @@ footer {
   margin-top: 15px;
   background-color: #212529;
   color: white;
-  font-size: 12px; }
-
-/*# sourceMappingURL=main.css.map */
+  font-size: 12px;
+}/*# sourceMappingURL=main.css.map */
